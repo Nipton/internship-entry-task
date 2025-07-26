@@ -1,0 +1,16 @@
+services:
+  tictactoeapi:
+    image: ${DOCKER_REGISTRY-}tictactoeapi
+    build:
+      context: .
+      dockerfile: TicTacToeAPI/Dockerfile
+    ports:
+    - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:8080
+      - ConnectionStrings__DefaultConnection=Data Source=/Data/game.db
+      - GameSettings__BoardSize=5
+      - GameSettings__WinLineLength=5
+    volumes:
+      - ./TicTacToeAPI/Data:/Data
